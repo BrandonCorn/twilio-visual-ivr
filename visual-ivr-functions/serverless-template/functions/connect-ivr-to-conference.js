@@ -6,10 +6,9 @@ exports.handler = (context, event, callback) => {
 
     const body = {
         From: event.From,
-        To: event.To,
         Conference: event.Conference,
     }
-    helpers.logger.info(`heres the body ${body}`)
+    helpers.logger.info(`heres the event info ${body}`)
     const client = helpers.twilio.createClient(context);
     client.conferences(body.Conference)
     .participants
@@ -17,7 +16,7 @@ exports.handler = (context, event, callback) => {
         beep: 'onEnter',
         statusCallbackEvent: ['ringing'],
         from: body.From,
-        to: body.To,
+        to: context.TWILIO_CONFERENCE_NUMBER,
     })
     .then(participant => {
         helpers.logger.info(`Added participant to conference ${participant}`); 
