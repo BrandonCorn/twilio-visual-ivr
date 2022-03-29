@@ -21,7 +21,7 @@ const responses = {
     [constants.SIGN_IN_PROCEED_AS_GUEST]: 'Please sign in, or proceed as a guest to continue.',
     [constants.SELECT_COMPUTER_TYPE]: "Please select the type of computer you're calling about.",
     [constants.ENTER_PC_INFORMATION]: "Please, fill out the form to tell us more about your personal computer.",
-    [constants.ENTER_LOGIN_INFORMATION]: "Sign in to continue",
+    [constants.ENTER_LOGIN_INFORMATION]: "Please sign in to continue",
     [constants.SELECT_COMPUTER_ISSUE]: "Select what you're experiencing from these top computer symptoms.",
     [constants.SELECT_COMPUTER_HELP]: "Select would kind of help you need with your computer.",
     [constants.ASK_COMPUTER_REPAIR]: "Would you like to schedule a repair for your computer? Click the button below.",

@@ -9,7 +9,7 @@ export default {
         SELECT_COMPUTER_TYPE: 'select-computer-type',
         ENTER_PC_INFORMATION: 'enter-pc-information',
         ENTER_LAPTOP_INFORMATION: 'enter-laptop-information',
-        ENTER_LOGIN_INFO: 'enter-login-info',
+        ENTER_LOGIN_INFORMATION: 'enter-login-information',
         SELECT_PC_SYMPTOMS: 'select-pc-symptoms',
         ASK_COMPUTER_REPAIR: 'ask-computer-repair',
         SCHEDULE_COMPUTER_REPAIR: 'schedule-computer-repair',

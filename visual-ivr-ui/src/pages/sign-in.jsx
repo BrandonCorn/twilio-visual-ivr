@@ -7,17 +7,15 @@ import { updateIvr } from '../hooks/api';
 import { setUserEmail } from '../hooks/store/actions';
 
 const SignIn = (props) => {
-    const ivrState = constants.ENTER_LOGIN_INFO;
+    const ivrState = constants.state.ENTER_LOGIN_INFORMATION;
     const [location, setLocation] = useLocation();
     const dispatch = useDispatch();
     const conference = useSelector(state => state.conference);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const handleEmail = (update) => {
-        console.log('updating email woah', update.target.value);
-        setEmail(update.target.value);
-    };
+    const handleEmail = (update) => setEmail(update.target.value);
+    
     const handlePassword = (update) => setPassword(update.target.value);
 
     const makeAnnouncement = (conferenceObject) => {
