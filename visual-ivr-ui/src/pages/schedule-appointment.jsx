@@ -8,7 +8,7 @@ import { updateIvr } from '../hooks/api';
 const Appointment = (props) => {
     const [location, setLocation] = useLocation();
     const [existingAppointments, setExistingAppointments] = useState([]);
-    let ivrState = constants.state.SCHEDULE_COMPUTER_REPAIR; 
+    const [ivrState, setIvrState] = useState(constants.state.SCHEDULE_COMPUTER_REPAIR); 
     const conference = useSelector(state => state.conference);
     const email = useSelector(state => state.user.email);
     const [isOpen, setIsOpen] = useState(false);
@@ -33,8 +33,6 @@ const Appointment = (props) => {
     const redirectHome = () => {
         handleClose();
         setLocation('/');
-        // ivrState = constants.COMPLETED_SCHEDULE_COMPUTER_REPAIR;
-        // if (conference.conference.length > 0) makeAnnouncement(ivrState, conference); 
     }
     
 
@@ -45,13 +43,12 @@ const Appointment = (props) => {
 
     useEffect(() => {
         if (isOpen){
-            ivrState = constants.COMPLETED_SCHEDULE_COMPUTER_REPAIR;
-            if(conference.conference.length > 0) makeAnnouncement(ivrState, conference);
+            //add additional logic if form submission failed
+            setIvrState(constants.state.COMPLETED_SCHEDULE_COMPUTER_REPAIR);
         }
     }, [isOpen])
 
     useEffect(() => {
-        console.log('logged in ', email);
         if (conference.conference.length > 0) makeAnnouncement(conference);
     },[ivrState]);
 
