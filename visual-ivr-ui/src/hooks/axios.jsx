@@ -1,8 +1,9 @@
 import axios from 'axios'; 
 
 const apiRequests = () => {
+    const baseURL = process.env.REACT_APP_API_BASE_URL || '';
     const api = axios.create({
-        baseURL: 'https://visual-ivr-functions-4076-dev.twil.io',
+        baseURL,
         headers: {
             'Access-Control-Allow-Origin': '*',
         }
