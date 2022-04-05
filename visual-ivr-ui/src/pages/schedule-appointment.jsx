@@ -1,9 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link, useLocation } from 'wouter';
 import { Box, DatePicker, Label, Card, Stack, HelpText, Input, Modal, ModalHeader, ModalHeading, ModalBody, ModalFooter, ModalFooterActions } from '@twilio-paste/core';
 import constants from '../constants';
 import { updateIvr } from '../hooks/api';
+import { updateAirTable } from '../hooks/api';
+import { setUserEmail } from '../hooks/store/actions';
 
 const Appointment = (props) => {
     const [location, setLocation] = useLocation();
@@ -11,7 +13,9 @@ const Appointment = (props) => {
     const [ivrState, setIvrState] = useState(constants.state.SCHEDULE_COMPUTER_REPAIR); 
     const conference = useSelector(state => state.conference);
     const email = useSelector(state => state.user.email);
+    const userState = useSelector(state => state.user);
     const [isOpen, setIsOpen] = useState(false);
+    const dispatch = useDispatch(); 
 
     const handleOpen = () => setIsOpen(true);
     const handleClose = () => setIsOpen(false);
@@ -45,6 +49,9 @@ const Appointment = (props) => {
         if (isOpen){
             //add additional logic if form submission failed
             setIvrState(constants.state.COMPLETED_SCHEDULE_COMPUTER_REPAIR);
+
+            //send appointment to airtable
+            updateAirTable(userState);
         }
     }, [isOpen])
 
@@ -64,11 +71,16 @@ const Appointment = (props) => {
                         <Box> 
                             <Label>Email Address </Label>
                             <Input 
-                                name='model_number'
+                                name='email'
                                 placeholder=''
                                 defaultValue={email ? email : ''}
                                 type='text'
-                                onChange={(change) => console.log('changes: ', change)}
+                                onChange={(e) => {
+                                    console.log('changes: ', e)
+                                    // update store with email
+                                    const emailUpdate = { email: e.target.value };
+                                    dispatch(setUserEmail(emailUpdate));
+                                }}
                             /> 
                             <HelpText>Your email address will allow us to send your a confirmation about your appointment. </HelpText>
                         </Box>

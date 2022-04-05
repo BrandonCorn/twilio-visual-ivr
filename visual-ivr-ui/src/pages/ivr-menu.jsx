@@ -39,7 +39,14 @@ const IvrMenu = (props) => {
             <div className = 'content'>
                 <h1 className = 'title'> Test Buy </h1>
                 <Stack orientation='horizontal' spacing='space60'> 
-                    <Link to = '/computers-tablets' > 
+                    <Link 
+                        to = '/computers-tablets'
+                        onChange={(e) => {
+                            // update store with device type
+                            const emailUpdate = { email: e.target.value };
+                            dispatch(setUserEmail(emailUpdate));
+                        }}
+                    > 
                         <button className = 'fill button'>Computers &amp; Tablets</button>
                     </Link>
                     <Link href = '/'> 
