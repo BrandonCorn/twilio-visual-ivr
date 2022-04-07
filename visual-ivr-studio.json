@@ -145,7 +145,7 @@
         "channel": "{{trigger.message.ChannelSid}}",
         "from": "{{flow.channel.address}}",
         "to": "{{contact.channel.address}}",
-        "body": "https://4eda-23-28-173-29.ngrok.io/ivr-menu?conference={{flow.variables.conference}}"
+        "body": "https://f3fe-23-28-173-29.ngrok.io/ivr-menu?conference={{flow.variables.conference}}"
       }
     },
     {
