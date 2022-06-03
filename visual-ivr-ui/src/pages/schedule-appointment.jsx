@@ -12,10 +12,15 @@ const Appointment = (props) => {
     const [existingAppointments, setExistingAppointments] = useState([]);
     const [ivrState, setIvrState] = useState(constants.state.SCHEDULE_COMPUTER_REPAIR); 
     const conference = useSelector(state => state.conference);
-    const email = useSelector(state => state.user.email);
     const userState = useSelector(state => state.user);
+    const [email, setEmail] = useState(userState.email ? userState.email : '');
     const [isOpen, setIsOpen] = useState(false);
     const dispatch = useDispatch(); 
+
+    const updateEmail = (e) => {
+        let emailUpdate = e.target.value;
+        setEmail(emailUpdate);
+    }
 
     const handleOpen = () => setIsOpen(true);
     const handleClose = () => setIsOpen(false);
@@ -49,6 +54,8 @@ const Appointment = (props) => {
         if (isOpen){
             //add additional logic if form submission failed
             setIvrState(constants.state.COMPLETED_SCHEDULE_COMPUTER_REPAIR);
+            
+            userState.email = email;
 
             //send appointment to airtable
             updateAirTable(userState);
@@ -76,10 +83,12 @@ const Appointment = (props) => {
                                 defaultValue={email ? email : ''}
                                 type='text'
                                 onChange={(e) => {
-                                    console.log('changes: ', e)
-                                    // update store with email
-                                    const emailUpdate = { email: e.target.value };
-                                    dispatch(setUserEmail(emailUpdate));
+                                    
+                                    updateEmail(e);
+                                    // console.log('changes: ', e)
+                                    // // update store with email
+                                    // const emailUpdate = { email: e.target.value };
+                                    // dispatch(setUserEmail(emailUpdate));
                                 }}
                             /> 
                             <HelpText>Your email address will allow us to send your a confirmation about your appointment. </HelpText>

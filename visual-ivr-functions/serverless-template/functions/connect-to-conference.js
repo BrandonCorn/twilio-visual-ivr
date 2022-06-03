@@ -20,7 +20,7 @@ exports.handler = (context, event, callback) => {
         return callback(null, twiml);
 }
     catch(err){
-        helpers.logger.error(`There was an error in /get-conference-name`); 
+        helpers.logger.error(`There was an error in /connect-to-conference`); 
         helpers.logger.error(err);
         return callback(err);
     }

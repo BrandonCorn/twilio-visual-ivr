@@ -18,6 +18,12 @@ const SignIn = (props) => {
     
     const handlePassword = (update) => setPassword(update.target.value);
 
+    const handleSignIn = () => {
+        console.log('setting email', email);
+        dispatch(setUserEmail({email}));
+        setLocation('/tech/computer-type');
+    }
+
     const makeAnnouncement = (conferenceObject) => {
         updateIvr(ivrState, conferenceObject)
         .then(response => {
@@ -29,12 +35,6 @@ const SignIn = (props) => {
         })
     }
 
-    const handleSignIn = () => {
-        console.log('setting email', email);
-        dispatch(setUserEmail({email}));
-        setLocation('/tech/computer-type');
-    }
-
     useEffect(() => {
         if (conference.conference.length > 0) makeAnnouncement(ivrState, conference);
     },[ivrState]);
@@ -42,7 +42,7 @@ const SignIn = (props) => {
     return (
         <div className = 'page'>
             <div className = 'content'> 
-                <h2 className = 'title'> What device are you having problems with?</h2>
+                <h2 className = 'title'>Sign In</h2>
                 <Card padding='space120'>
                     <Stack orientation='vertical' spacing='space60'> 
                     <div>
@@ -53,7 +53,6 @@ const SignIn = (props) => {
                             type='email'
                             onChange={handleEmail}
                         /> 
-                        {/* <HelpText>The model number will help us provide the most accurate diagnosis of your tech problem.</HelpText> */}
                     </div>
                         <div>
                             <Label>Password</Label>
@@ -63,7 +62,6 @@ const SignIn = (props) => {
                                 type='password'
                                 onChange={handlePassword}
                             /> 
-                            {/* <HelpText>The model number will help us provide the most accurate diagnosis of your tech problem.</HelpText> */}
                         </div>
                     </Stack>
                 </Card>

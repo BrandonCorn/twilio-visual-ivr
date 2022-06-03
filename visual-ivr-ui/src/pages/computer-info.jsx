@@ -10,6 +10,12 @@ const ComputerInfo = (props) => {
     const [selectedBrand, setSelectedBrand] = useState('');
     const ivrState = constants.state.ENTER_PC_INFORMATION; 
     const conference = useSelector(state => state.conference);
+    
+
+    //temporary hardcoded user computer info 
+    const userComputerBrand = 'Alienware';
+    const userModelNumber = 'HGK938A8'; 
+    const userSerialNumber = '02948738492';
 
     const makeAnnouncement = (conferenceObject) => {
         updateIvr(ivrState, conferenceObject)
@@ -40,6 +46,7 @@ const ComputerInfo = (props) => {
                             onSelectedItemChange={(changes) => {
                                 if (changes.selectedItem !== null) handleBrandSelection(changes.selectedItem);
                             }}
+                            selectedItem={userComputerBrand ? userComputerBrand : ''}
                             required
                         /> 
                         <div>
@@ -48,6 +55,7 @@ const ComputerInfo = (props) => {
                                 name='model_number'
                                 placeholder='e.g. MC700LLA'
                                 type='text'
+                                defaultValue={userModelNumber ? userModelNumber : ''}
                                 onChange={(change) => console.log('changes: ', change)}
                             /> 
                             <HelpText>The model number will help us provide the most accurate diagnosis of your tech problem.</HelpText>
@@ -55,9 +63,10 @@ const ComputerInfo = (props) => {
                         <div>
                             <Label>Serial Number </Label>
                             <Input 
-                                name='model_number'
+                                name='serial_number'
                                 placeholder='e.g. 91234912491'
                                 type='text'
+                                defaultValue={userSerialNumber ? userSerialNumber : ''}
                                 onChange={(change) => console.log('changes: ', change)}
                             /> 
                             <HelpText>The model number will help us provide the most accurate diagnosis of your tech problem.</HelpText>

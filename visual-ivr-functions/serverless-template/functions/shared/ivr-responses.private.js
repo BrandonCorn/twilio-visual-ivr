@@ -1,4 +1,9 @@
-const constants = {
+//Side note: State references where in your visual component the customer is. If they're on the main-menu and need an announcement, there must
+// exist a main-menu state like below
+
+
+//names for the state of customers navigation in visual ui
+const states = {
     MAIN_MENU: 'main-menu',
     SELECT_DEVICE_TYPE: 'select-device-type',
     SELECT_DEVICE_ISSUE: 'select-device-issue', 
@@ -14,84 +19,19 @@ const constants = {
     COMPLETED_SCHEDULE_COMPUTER_REPAIR: 'completed-schedule-computer-repair'
 }
 
-const mainMenu = (helpers) => {
-    let message = 'Select the topic your seeking help with';
-    helpers.logger.info(`grabbed response for ${constants.MAIN_MENU}`);
-    return message;
-}
-
-const selectDeviceType = (helpers) => {
-    let message = 'Select the device type you need assistance with.';
-    helpers.logger.info(`grabbed response for ${constants.SELECT_DEVICE_TYPE}`);
-    return message;
-}
-
-const selectComputerHelp = (helpers) => {
-    let message = 'Select the help you need with you computer.';
-    helpers.logger.info(`grabbed response for ${constants.SELECT_COMPUTER_HELP}`);
-    return message;
-}
-
-const signInProceedAsGuest = (helpers) => {
-    let message = 'Please sign in, or proceed as a guest to continue.';
-    helpers.logger.info(`grabbed response for ${constants.SIGN_IN_PROCEED_AS_GUEST}`);
-    return message;
-}
-
-const selectComputerType = (helpers) => {
-    let message = "Please select the type of computer you're calling about.";
-    helpers.logger.info(`grabbed response for ${constants.SELECT_COMPUTER_TYPE}`);
-    return message;
-}
-
-const enterPcInformation = (helpers) => {
-    let message = "Please, fill out the form to tell us more about your personal computer.";
-    helpers.logger.info(`grabbed response for ${constants.ENTER_PC_INFORMATION}`);
-    return message;
-}
-
-const enterLoginInformation = (helpers) => {
-    let message = 'Please sign in to continue.';
-    helpers.logger.info(`grabbed response for ${constants.ENTER_LOGIN_INFORMATION}`);
-    return message;
-}
-
-const selectComputerIssue = (helpers) => {
-    let message = "Select what you're experiencing from these top computer symptoms.";
-    helpers.logger.info(`grabbed response for ${constants.SELECT_COMPUTER_ISSUE}`);
-    return message;
-}
-
-const askComputerRepair = (helpers) => {
-    let message = "Would you like to schedule a repair for your computer? Click the button below.";
-    helpers.logger.info(`grabbed response for ${constants.ASK_COMPUTER_REPAIR}`);
-    return message;
-}
-
-const scheduleComputerRepair = (helpers) => {
-    let message = 'Please select a date to schedule your repair. Then enter your email address so we can follow up with you about your appointment.';
-    helpers.logger.info(`grabbed response for ${constants.SCHEDULE_COMPUTER_REPAIR}`);
-    return message;
-}
-
-const completedScheduleComputerRepair = (helpers) => {
-    let message = 'Thank you for scheduling your appointment. We look forward to seeing you soon.';
-    helpers.logger.info(`grabbed response for ${constants.COMPLETED_SCHEDULE_COMPUTER_REPAIR}`);
-    return message;
-}
-
+//message responses for customer based on state
 const responses = {
-    [constants.MAIN_MENU]: mainMenu,
-    [constants.SELECT_DEVICE_TYPE]: selectDeviceType,
-    [constants.SELECT_COMPUTER_HELP]: selectComputerHelp,
-    [constants.SIGN_IN_PROCEED_AS_GUEST]: signInProceedAsGuest,
-    [constants.SELECT_COMPUTER_TYPE]: selectComputerType,
-    [constants.ENTER_PC_INFORMATION]: enterPcInformation,
-    [constants.ENTER_LOGIN_INFORMATION]: enterLoginInformation,
-    [constants.SELECT_COMPUTER_ISSUE]: selectComputerIssue,
-    [constants.ASK_COMPUTER_REPAIR]: askComputerRepair,
-    [constants.SCHEDULE_COMPUTER_REPAIR]: scheduleComputerRepair,
-    [constants.COMPLETED_SCHEDULE_COMPUTER_REPAIR]: completedScheduleComputerRepair,
+    [states.MAIN_MENU]: 'Select the topic your seeking help with',
+    [states.SELECT_DEVICE_TYPE]: 'Select the device type you need assistance with.',
+    [states.SELECT_COMPUTER_HELP]: 'Select the help you need with you computer.',
+    [states.SIGN_IN_PROCEED_AS_GUEST]: 'Select the help you need with you computer.',
+    [states.SELECT_COMPUTER_TYPE]: 'Please sign in, or proceed as a guest to continue.',
+    [states.ENTER_PC_INFORMATION]: "Please, fill out the form to tell us more about your personal computer.",
+    [states.ENTER_LOGIN_INFORMATION]: 'Please sign in.',
+    [states.SELECT_COMPUTER_ISSUE]: "Select what you're experiencing from these top computer symptoms.",
+    [states.ASK_COMPUTER_REPAIR]: "Would you like to schedule a repair for your computer? Click the button below.",
+    [states.SCHEDULE_COMPUTER_REPAIR]: 'Please select a date to schedule your repair. Then enter your email address so we can follow up with you about your appointment.',
+    [states.COMPLETED_SCHEDULE_COMPUTER_REPAIR]: 'Thank you for scheduling your appointment. We look forward to seeing you soon.',
 }
 
 
@@ -100,8 +40,7 @@ const respond = (helpers, state) => {
     helpers.logger.info(`grabbing response with state ${state}`);
     let twiml = new Twilio.twiml.VoiceResponse(); 
     try{
-        const getMessageFormat = responses[state];
-        let message = getMessageFormat(helpers);
+        let message = responses[state];
         twiml.say(message);
         helpers.logger.info(`selected message ${twiml}`);
         return twiml; 
