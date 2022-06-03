@@ -36,7 +36,6 @@ const responses = {
 
 
 const respond = (helpers, state) => {
-    
     helpers.logger.info(`grabbing response with state ${state}`);
     let twiml = new Twilio.twiml.VoiceResponse(); 
     try{
