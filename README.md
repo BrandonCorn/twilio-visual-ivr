@@ -16,7 +16,9 @@ npm install
 
 ## Getting Started With Twilio Studio
 
-In order to jump start the Twilio Visual IVR you need to import the visual-ivr-studio.json flow into your own Twilio account. You can see how this is done in the console [here](https://www.twilio.com/docs/studio/user-guide#importing-flow-data).
+In order to jump start the Twilio Visual IVR you need to import the visual-ivr-studio.json flow into your own Twilio account. You can see how this is done in the console [here](https://www.twilio.com/docs/studio/user-guide#importing-flow-data). 
+
+Connect the studio flow to one of your phone numbers webhook. You can find how to do so [here](https://www.twilio.com/docs/runtime/quickstart/serverless-functions-receive-a-call#set-a-function-as-a-webhook). Your other Twilio phone number will be connected to a webhook as well and instead to function called visual-ivr-greeting. This can be done after you deploy your serverless functions.
 
 ## Deploying Twilio Serverless Functions 
 
