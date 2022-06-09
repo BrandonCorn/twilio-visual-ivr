@@ -13,6 +13,9 @@
           "event": "incomingCall"
         },
         {
+          "event": "incomingConversationMessage"
+        },
+        {
           "event": "incomingRequest"
         },
         {
@@ -35,7 +38,6 @@
           "event": "keypress"
         },
         {
-          "next": "choice_speech",
           "event": "speech"
         },
         {
@@ -53,7 +55,7 @@
         },
         "loop": 1,
         "finish_on_key": "#",
-        "say": "Hey, welcome to the Twilio IVR. Would you like to interact with our new visual IVR? Press 1 for yes, press 2 for no.",
+        "say": "Hey Krista, thanks for calling Test Buy. Would you like to interact with our new visual IVR? Press 1 for yes, press 2 for no.",
         "language": "en-GB",
         "stop_gather": true,
         "gather_language": "en-US",
@@ -87,39 +89,8 @@
       "properties": {
         "input": "{{widgets.choice_visual_ivr.Digits}}",
         "offset": {
-          "x": -220,
-          "y": 570
-        }
-      }
-    },
-    {
-      "name": "choice_speech",
-      "type": "split-based-on",
-      "transitions": [
-        {
-          "next": "error_choice_visual_ivr",
-          "event": "noMatch"
-        },
-        {
-          "next": "get-conference-name",
-          "event": "match",
-          "conditions": [
-            {
-              "friendly_name": "If value equal_to Yes",
-              "arguments": [
-                "{{widgets.choice_visual_ivr.SpeechResult}}"
-              ],
-              "type": "equal_to",
-              "value": "Yes"
-            }
-          ]
-        }
-      ],
-      "properties": {
-        "input": "{{widgets.choice_visual_ivr.SpeechResult}}",
-        "offset": {
-          "x": 260,
-          "y": 560
+          "x": 60,
+          "y": 590
         }
       }
     },
@@ -128,7 +99,7 @@
       "type": "send-message",
       "transitions": [
         {
-          "next": "connect-ivr-to-conference",
+          "next": "connect-to-conference-",
           "event": "sent"
         },
         {
@@ -145,7 +116,7 @@
         "channel": "{{trigger.message.ChannelSid}}",
         "from": "{{flow.channel.address}}",
         "to": "{{contact.channel.address}}",
-        "body": "https://f3fe-23-28-173-29.ngrok.io/ivr-menu?conference={{flow.variables.conference}}"
+        "body": "{{flow.variables.conference}}"
       }
     },
     {
@@ -171,30 +142,6 @@
       }
     },
     {
-      "name": "connect-to-conference",
-      "type": "add-twiml-redirect",
-      "transitions": [
-        {
-          "event": "return"
-        },
-        {
-          "event": "timeout"
-        },
-        {
-          "event": "fail"
-        }
-      ],
-      "properties": {
-        "offset": {
-          "x": 260,
-          "y": 1880
-        },
-        "method": "POST",
-        "url": "https://visual-ivr-functions-4076-dev.twil.io/connect-to-conference?conference={{flow.variables.conference}}",
-        "timeout": "14400"
-      }
-    },
-    {
       "name": "get-conference-name",
       "type": "run-function",
       "transitions": [
@@ -208,47 +155,14 @@
         }
       ],
       "properties": {
-        "service_sid": "ZS66cf609a9bbc0ab7ee04ed7a8105c116",
-        "environment_sid": "ZE26f02bc4fa8d21dc3b1f6b37e7a89d4a",
+        "service_sid": "ZS9b3d2bb1e05ff2421409bb87701d8e8a",
+        "environment_sid": "ZE12803414e903c8019263e57420af1a44",
         "offset": {
           "x": 190,
           "y": 900
         },
-        "function_sid": "ZH11a9766f060c18aac6956db22569da3f",
-        "url": "https://visual-ivr-functions-4076-dev.twil.io/get-conference-name"
-      }
-    },
-    {
-      "name": "connect-ivr-to-conference",
-      "type": "run-function",
-      "transitions": [
-        {
-          "next": "connect-to-conference",
-          "event": "success"
-        },
-        {
-          "event": "fail"
-        }
-      ],
-      "properties": {
-        "service_sid": "ZS66cf609a9bbc0ab7ee04ed7a8105c116",
-        "environment_sid": "ZE26f02bc4fa8d21dc3b1f6b37e7a89d4a",
-        "offset": {
-          "x": 240,
-          "y": 1610
-        },
-        "function_sid": "ZHd3edaa240fa4bab0ca46336f56f2a277",
-        "parameters": [
-          {
-            "value": "{{flow.channel.address}}",
-            "key": "From"
-          },
-          {
-            "value": "{{flow.variables.conference}}",
-            "key": "Conference"
-          }
-        ],
-        "url": "https://visual-ivr-functions-4076-dev.twil.io/connect-ivr-to-conference"
+        "function_sid": "ZHdd31bcbe822b2b0faf53d0055b035ace",
+        "url": "https://visual-ivr-functions-9818-dev.twil.io/get-conference-name"
       }
     },
     {
@@ -260,7 +174,6 @@
           "event": "keypress"
         },
         {
-          "next": "choice_speech",
           "event": "speech"
         },
         {
@@ -284,6 +197,38 @@
         "gather_language": "en-US",
         "profanity_filter": "true",
         "timeout": 5
+      }
+    },
+    {
+      "name": "connect-to-conference-",
+      "type": "run-function",
+      "transitions": [
+        {
+          "event": "success"
+        },
+        {
+          "event": "fail"
+        }
+      ],
+      "properties": {
+        "service_sid": "ZS9b3d2bb1e05ff2421409bb87701d8e8a",
+        "environment_sid": "ZE12803414e903c8019263e57420af1a44",
+        "offset": {
+          "x": 260,
+          "y": 1660
+        },
+        "function_sid": "ZH714dde88e7180e91f6b0a930b2f007a5",
+        "parameters": [
+          {
+            "value": "{{flow.channel.address}}.",
+            "key": "from"
+          },
+          {
+            "value": "{{flow.variables.conference}}",
+            "key": "conference"
+          }
+        ],
+        "url": "https://visual-ivr-functions-9818-dev.twil.io/connect-to-conference"
       }
     }
   ],
