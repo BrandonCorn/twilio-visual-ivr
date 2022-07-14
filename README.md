@@ -14,17 +14,11 @@ Navigate to the serverless-template & visual-ivr-ui directories respectively and
 npm install
 ```
 
-## Getting Started With Twilio Studio
-
-In order to jump start the Twilio Visual IVR you need to import the visual-ivr-studio.json flow into your own Twilio account. You can see how this is done in the console [here](https://www.twilio.com/docs/studio/user-guide#importing-flow-data). 
-
-Connect the studio flow to one of your phone numbers webhook. You can find how to do so [here](https://www.twilio.com/docs/runtime/quickstart/serverless-functions-receive-a-call#set-a-function-as-a-webhook). Your other Twilio phone number will be connected to a webhook as well and instead to function called visual-ivr-greeting. This can be done after you deploy your serverless functions.
-
 ## Deploying Twilio Serverless Functions 
 
 ### Dependencies
 
-Make sure to install the twilio cli and serverless cli plugin. 
+Install the twilio cli and serverless cli plugin. 
 
 ```bash
 brew install twilio
@@ -63,6 +57,18 @@ Use logging to your advantage. Overly log on debug to be able to troubleshoot in
 Some additional logging best practices [here](https://blog.bitsrc.io/logging-best-practices-for-node-js-applications-8a0a5969b94c)
 
 Lambda best practices [here](https://docs.aws.amazon.com/lambda/latest/dg/best-practices.html)
+
+## Getting Started With Twilio Studio
+
+In order to jump start the Twilio Visual IVR you need to import the visual-ivr-studio.json flow into your own Twilio account. You can see how this is done in the console [here](https://www.twilio.com/docs/studio/user-guide#importing-flow-data). 
+
+Connect the studio flow to one of your Twilio phone numbers webhook. You can find how to do so [here](https://www.twilio.com/docs/runtime/quickstart/serverless-functions-receive-a-call#set-a-function-as-a-webhook). Your other Twilio phone number will be connected to a webhook as well and instead to function called visual-ivr-greeting. This can be done after you deploy your serverless functions.
+
+## Creating the Conference Call
+
+The conference call used for the Visual IVR to make announcements to the user requires a ghost leg, a number different from the one connected to your Studio flow. Once you've purchased this phone number, place it in your Twilio Functions .env file as your TWILIO_CONFERENCE_NUMBER. 
+
+If you want this phone number to provide a greeting to your user letting them know they've entered the visual flow, setup the incoming voice call webhook for this Twilio phone number to point to your Twilio Functions /visual-ivr-greeting endpoint. This is done the same way the Studio flow was setup.
 
 # Deploying Your Visual IVR With Create React App
 

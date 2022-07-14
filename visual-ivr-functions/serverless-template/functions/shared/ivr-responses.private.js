@@ -36,12 +36,10 @@ const responses = {
 
 
 const respond = (helpers, state) => {
-    helpers.logger.info(`grabbing response with state ${state}`);
     let twiml = new Twilio.twiml.VoiceResponse(); 
     try{
         let message = responses[state];
         twiml.say(message);
-        helpers.logger.info(`selected message ${twiml}`);
         return twiml; 
     }
     catch(err){
