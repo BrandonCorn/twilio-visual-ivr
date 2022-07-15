@@ -68,6 +68,10 @@ Connect the studio flow to one of your Twilio phone numbers webhook. You can fin
 
 The conference call used for the Visual IVR to make announcements to the user requires a ghost leg, a number different from the one connected to your Studio flow. Once you've purchased this phone number, place it in your Twilio Functions .env file as your TWILIO_CONFERENCE_NUMBER. 
 
+```bash
+TWILIO_CONFERENCE_NUMBER=+18889217364
+```
+
 If you want this phone number to provide a greeting to your user letting them know they've entered the visual flow, setup the incoming voice call webhook for this Twilio phone number to point to your Twilio Functions /visual-ivr-greeting endpoint. This is done the same way the Studio flow was setup.
 
 # Deploying Your Visual IVR With Create React App

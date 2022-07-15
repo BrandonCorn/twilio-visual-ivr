@@ -4,11 +4,11 @@ exports.handler = (context, event, callback) => {
     const helpers = new Helpers(context, event);
     const client = helpers.twilio.createClient(context);
     
-    const { from, conference, customer } = event;
+    const { from, conference } = event;
 
     const twiml = new Twilio.twiml.VoiceResponse();
     let dial = twiml.dial();
-
+    
     client.conferences(conference)
     .participants
     .create({

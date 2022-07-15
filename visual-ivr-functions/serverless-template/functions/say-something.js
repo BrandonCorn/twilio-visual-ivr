@@ -8,6 +8,7 @@ exports.handler = (context, event, callback) => {
         return callback(null, twiml);
     }
     catch(err){
+        helpers.logger.error(err);
         return callback(err);
     }
 }
