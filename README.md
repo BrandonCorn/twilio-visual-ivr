@@ -8,7 +8,7 @@ Purchase two Twilio phone numbers for use of this project. One phone number you 
 
 ## Installation
 
-Navigate to the serverless-template & visual-ivr-ui directories respectively and perform an 
+Navigate to the serverless-template & visual-ivr-ui directories respectively and install the package dependencies.
 
 ```bash
 npm install
@@ -25,6 +25,8 @@ brew install twilio
 twilio plugins:install @twilio-labs/plugin-serverless
 ```
 
+Once you've installed the Twilio CLI, you'll need to login into your account so that your serverless functions can be deployed there. For guidance getting started with Twilio CLI see [here](https://www.twilio.com/docs/twilio-cli/quickstart).  
+
 ### Setup .env files
 
 Setup environment files per environment
@@ -32,35 +34,26 @@ Setup environment files per environment
 Take advantage of multiple environments (.env.stage, .env.prod, etc)
 
 ```bash
-cp env.sample .env.stage
+cp env.sample .env
 ```
 
 Populate sample environment file with accurate values for current twilio project
 
 ### Deploy serverless project
 
+Once you've added your environment variables to your .env file, you need to deploy the serverless functions from the visual-ivr-functions directory. The Twilio CLI is an effective and easy method for continuous edits and deployment of your functions. For further guidance deploying from the CLI, see [here](https://www.twilio.com/docs/labs/serverless-toolkit/deploying).
+
 ```bash
 #Populate environment values (switch out .env for .env.stage, .env.prod, etc)
 twilio serverless:deploy --env .env
 ```
 
-## Best Practices
+Alternatively, you can import the files from within the Twilio Console. 
 
-Visibility [here](https://www.twilio.com/docs/runtime/functions-assets-api/api/understanding-visibility-public-private-and-protected-functions-and-assets)
-
-Keep library specific functionality within helpers
-
-Keep reusable chunks within shared
-
-Use logging to your advantage. Overly log on debug to be able to troubleshoot in production
-
-Some additional logging best practices [here](https://blog.bitsrc.io/logging-best-practices-for-node-js-applications-8a0a5969b94c)
-
-Lambda best practices [here](https://docs.aws.amazon.com/lambda/latest/dg/best-practices.html)
 
 ## Getting Started With Twilio Studio
 
-In order to jump start the Twilio Visual IVR you need to import the visual-ivr-studio.json flow into your own Twilio account. You can see how this is done in the console [here](https://www.twilio.com/docs/studio/user-guide#importing-flow-data). 
+To jump start the Twilio Visual IVR, import the visual-ivr-studio.json flow into your own Twilio account. You can see how this is done in the console [here](https://www.twilio.com/docs/studio/user-guide#importing-flow-data). 
 
 Connect the studio flow to one of your Twilio phone numbers webhook. You can find how to do so [here](https://www.twilio.com/docs/runtime/quickstart/serverless-functions-receive-a-call#set-a-function-as-a-webhook). Your other Twilio phone number will be connected to a webhook as well and instead to function called visual-ivr-greeting. This can be done after you deploy your serverless functions.
 
