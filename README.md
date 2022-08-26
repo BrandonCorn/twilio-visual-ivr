@@ -50,6 +50,20 @@ twilio serverless:deploy --env .env
 
 Alternatively, you can import the files from within the Twilio Console. 
 
+### Best Practices
+
+Visibility [here](https://www.twilio.com/docs/runtime/functions-assets-api/api/understanding-visibility-public-private-and-protected-functions-and-assets)
+
+Keep library specific functionality within helpers
+
+Keep reusable chunks within shared
+
+Use logging to your advantage. Overly log on debug to be able to troubleshoot in production
+
+Some additional logging best practices [here](https://blog.bitsrc.io/logging-best-practices-for-node-js-applications-8a0a5969b94c)
+
+Lambda best practices [here](https://docs.aws.amazon.com/lambda/latest/dg/best-practices.html)
+
 
 ## Getting Started With Twilio Studio
 
